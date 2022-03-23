@@ -12,4 +12,7 @@
 *.out
 
 # Dependency directories (remove the comment below to include it)
-# vendor/
+vendor/
+
+# Don't add GoLand IDE settings
+.idea
