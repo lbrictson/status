@@ -12,7 +12,7 @@ type Template struct {
 	templates *template.Template
 }
 
-func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
+func (t *Template) Render(w io.Writer, name string, data any, c echo.Context) error {
 	err := t.templates.ExecuteTemplate(w, name, data)
 	if err != nil {
 		fmt.Printf("something went wrong rendering template %v with err %v", name, err.Error())

@@ -1,0 +1,1 @@
+The data directory holds tmp files that are generally git ignored.

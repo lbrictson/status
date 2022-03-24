@@ -7,7 +7,7 @@ import (
 )
 
 func (s Server) indexView(c echo.Context) error {
-	return c.Render(http.StatusOK, "index", map[string]interface{}{
+	return c.Render(http.StatusOK, "index", map[string]any{
 		"Name": "Bob",
 	})
 }
