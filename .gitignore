@@ -16,3 +16,6 @@ vendor/
 
 # Don't add GoLand IDE settings
 .idea
+
+# Don't add local data files
+data/*.db
