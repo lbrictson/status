@@ -11,3 +11,7 @@ func (s Server) indexView(c echo.Context) error {
 		"Name": "Bob",
 	})
 }
+
+func (s Server) loginView(c echo.Context) error {
+	return c.Render(http.StatusOK, "login", nil)
+}

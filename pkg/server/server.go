@@ -6,19 +6,28 @@ import (
 	"io/fs"
 	"net/http"
 
+	"github.com/lbrictson/status/pkg"
+
 	"github.com/lbrictson/status/web"
 
 	"github.com/labstack/echo/v4"
-	"github.com/lbrictson/status/pkg/configuration"
 )
 
 // Server holds all the deps of our server instance
 type Server struct {
+	store pkg.StorageBackend
+}
+
+type NewServerConfig struct {
+	Port  int
+	Store pkg.StorageBackend
 }
 
 // Run starts a blocking webserver
-func Run(config *configuration.Config) {
-	server := Server{}
+func Run(config NewServerConfig) {
+	server := Server{
+		store: config.Store,
+	}
 	embeddedFiles := web.Assets
 	fSys, err := fs.Sub(embeddedFiles, "static")
 	if err != nil {
@@ -31,5 +40,7 @@ func Run(config *configuration.Config) {
 	s.Renderer = &t
 	s.GET("/static/*", echo.WrapHandler(http.StripPrefix("/static/", assetHandler)))
 	s.GET("/", server.indexView)
-	s.Logger.Fatal(s.Start(fmt.Sprintf(":%v", config.WebPort)))
+	s.GET("/login", server.loginView)
+	s.POST("/login", server.loginForm)
+	s.Logger.Fatal(s.Start(fmt.Sprintf(":%v", config.Port)))
 }

@@ -10,8 +10,10 @@ type Config struct {
 	// Server configs
 	WebPort int `default:"6672"`
 	// Auth configs
-
+	DefaultOperator string `default:"admin@localhost"`
+	DefaultPassword string `default:"admin"`
 	// Database configs
+	DatabaseFileLocation string `default:"data/local.db"`
 }
 
 func MustReadConfigurationFromEnvVars() *Config {
